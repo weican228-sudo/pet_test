@@ -1,1 +1,1291 @@
-placeholder
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>蛋挞香香屋</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #182126;
+      --muted: #64727a;
+      --line: #dbe4e7;
+      --paper: #fbf8f1;
+      --mint: #8fd1c7;
+      --teal: #1f8f86;
+      --coral: #ff8a65;
+      --cream: #fffdf8;
+      --shadow: 0 22px 55px rgba(24, 33, 38, .12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      color: var(--ink);
+      background: var(--paper);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 16px clamp(18px, 5vw, 72px);
+      background: rgba(251, 248, 241, .88);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(219, 228, 231, .85);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      letter-spacing: 0;
+      white-space: nowrap;
+    }
+
+    .brand-mark {
+      position: relative;
+      display: block;
+      width: 38px;
+      height: 38px;
+      flex: 0 0 38px;
+    }
+
+    .cat-face {
+      position: absolute;
+      inset: 7px 4px 3px;
+      border-radius: 52% 52% 48% 48%;
+      background: var(--teal);
+      box-shadow: 0 8px 20px rgba(31, 143, 134, .28);
+    }
+
+    .cat-ear {
+      position: absolute;
+      top: 2px;
+      width: 15px;
+      height: 17px;
+      background: var(--teal);
+      clip-path: polygon(50% 0, 100% 100%, 0 100%);
+    }
+
+    .cat-ear-left {
+      left: 5px;
+      transform: rotate(-18deg);
+    }
+
+    .cat-ear-right {
+      right: 5px;
+      transform: rotate(18deg);
+    }
+
+    .cat-eye {
+      position: absolute;
+      top: 12px;
+      width: 4px;
+      height: 7px;
+      border-radius: 999px;
+      background: #fff;
+    }
+
+    .cat-eye-left {
+      left: 9px;
+    }
+
+    .cat-eye-right {
+      right: 9px;
+    }
+
+    .cat-nose {
+      position: absolute;
+      left: 50%;
+      top: 20px;
+      width: 6px;
+      height: 5px;
+      border-radius: 50% 50% 60% 60%;
+      background: #fff;
+      transform: translateX(-50%);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      color: #36464d;
+      font-size: 15px;
+    }
+
+    .nav a:hover {
+      color: var(--teal);
+    }
+
+    .phone {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 0 18px;
+      border-radius: 999px;
+      color: #fff;
+      background: var(--ink);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .hero {
+      min-height: calc(100vh - 72px);
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(320px, .82fr);
+      align-items: center;
+      gap: clamp(28px, 5vw, 72px);
+      padding: clamp(34px, 6vw, 84px) clamp(18px, 5vw, 72px) 48px;
+      overflow: hidden;
+    }
+
+    .hero-copy {
+      max-width: 680px;
+    }
+
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 18px;
+      color: var(--teal);
+      font-weight: 800;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(44px, 7vw, 92px);
+      line-height: .98;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      max-width: 580px;
+      margin: 24px 0 0;
+      color: #415058;
+      font-size: clamp(18px, 2.3vw, 22px);
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 34px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 50px;
+      padding: 0 22px;
+      border: 1px solid var(--ink);
+      border-radius: 999px;
+      font-weight: 800;
+    }
+
+    .btn-primary {
+      color: #fff;
+      background: var(--coral);
+      border-color: var(--coral);
+      box-shadow: 0 16px 30px rgba(255, 138, 101, .28);
+    }
+
+    .btn-secondary {
+      background: transparent;
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 42px;
+      max-width: 560px;
+    }
+
+    .metric {
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 253, 248, .68);
+    }
+
+    .metric b {
+      display: block;
+      font-size: 28px;
+      line-height: 1.1;
+    }
+
+    .metric span {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .hero-photo {
+      position: relative;
+      min-height: 610px;
+    }
+
+    .photo-main {
+      position: absolute;
+      inset: 0 0 44px 0;
+      overflow: hidden;
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      background: #dbe4e7;
+    }
+
+    .photo-badge {
+      position: absolute;
+      right: clamp(12px, 4vw, 34px);
+      bottom: 0;
+      width: min(86%, 360px);
+      padding: 20px;
+      border-radius: 8px;
+      background: var(--cream);
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(219, 228, 231, .8);
+    }
+
+    .photo-badge strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 20px;
+    }
+
+    .photo-badge p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    section {
+      padding: 78px clamp(18px, 5vw, 72px);
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 28px;
+      max-width: 1180px;
+      margin: 0 auto 30px;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-size: clamp(30px, 4vw, 48px);
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    .section-head p {
+      max-width: 460px;
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .services {
+      background: #ffffff;
+    }
+
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+
+    .service {
+      min-height: 260px;
+      padding: 24px;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: #fff;
+    }
+
+    .service-icon {
+      display: grid;
+      width: 48px;
+      height: 48px;
+      place-items: center;
+      margin-bottom: 18px;
+      border-radius: 50%;
+      background: #e2f4f1;
+      color: var(--teal);
+      font-size: 24px;
+    }
+
+    .grooming-icon,
+    .trim-icon,
+    .care-icon,
+    .kitten-icon {
+      position: relative;
+      display: block;
+      width: 30px;
+      height: 30px;
+    }
+
+    .shower-head {
+      position: absolute;
+      top: 6px;
+      left: 5px;
+      width: 17px;
+      height: 12px;
+      border: 3px solid var(--teal);
+      border-right-width: 4px;
+      border-radius: 11px 11px 6px 6px;
+      transform: rotate(-28deg);
+    }
+
+    .shower-handle {
+      position: absolute;
+      top: 15px;
+      left: 18px;
+      width: 4px;
+      height: 12px;
+      border-radius: 999px;
+      background: var(--teal);
+      transform: rotate(-28deg);
+    }
+
+    .water-drop {
+      position: absolute;
+      width: 4px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--teal);
+    }
+
+    .drop-one {
+      left: 5px;
+      bottom: 3px;
+      transform: rotate(20deg);
+    }
+
+    .drop-two {
+      left: 13px;
+      bottom: 0;
+    }
+
+    .drop-three {
+      right: 5px;
+      bottom: 4px;
+      transform: rotate(-20deg);
+    }
+
+    .scissor-blade {
+      position: absolute;
+      top: 5px;
+      left: 13px;
+      width: 4px;
+      height: 18px;
+      border-radius: 999px 999px 2px 2px;
+      background: var(--teal);
+      transform-origin: 50% 85%;
+    }
+
+    .scissor-blade-left {
+      transform: rotate(-42deg);
+    }
+
+    .scissor-blade-right {
+      transform: rotate(42deg);
+    }
+
+    .scissor-joint {
+      position: absolute;
+      left: 50%;
+      top: 14px;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--teal);
+      transform: translateX(-50%);
+    }
+
+    .scissor-handle {
+      position: absolute;
+      bottom: 2px;
+      width: 9px;
+      height: 9px;
+      border: 3px solid var(--teal);
+      border-radius: 50%;
+    }
+
+    .scissor-handle-left {
+      left: 4px;
+    }
+
+    .scissor-handle-right {
+      right: 4px;
+    }
+
+    .care-leaf {
+      position: absolute;
+      top: 8px;
+      width: 15px;
+      height: 19px;
+      border-radius: 100% 0 100% 0;
+      border: 3px solid var(--teal);
+    }
+
+    .care-leaf-left {
+      left: 2px;
+      transform: rotate(-38deg);
+    }
+
+    .care-leaf-right {
+      right: 2px;
+      transform: scaleX(-1) rotate(-38deg);
+    }
+
+    .care-stem {
+      position: absolute;
+      left: 50%;
+      bottom: 3px;
+      width: 3px;
+      height: 13px;
+      border-radius: 999px;
+      background: var(--teal);
+      transform: translateX(-50%);
+    }
+
+    .care-cross {
+      position: absolute;
+      left: 50%;
+      top: 2px;
+      border-radius: 999px;
+      background: var(--teal);
+      transform: translateX(-50%);
+    }
+
+    .care-cross-vertical {
+      width: 4px;
+      height: 13px;
+    }
+
+    .care-cross-horizontal {
+      top: 6px;
+      width: 13px;
+      height: 4px;
+    }
+
+    .kitten-face {
+      position: absolute;
+      left: 3px;
+      right: 3px;
+      bottom: 2px;
+      height: 23px;
+      border-radius: 52% 52% 48% 48%;
+      background: var(--teal);
+    }
+
+    .kitten-ear {
+      position: absolute;
+      top: 2px;
+      width: 12px;
+      height: 13px;
+      background: var(--teal);
+      clip-path: polygon(50% 0, 100% 100%, 0 100%);
+    }
+
+    .kitten-ear-left {
+      left: 4px;
+      transform: rotate(-18deg);
+    }
+
+    .kitten-ear-right {
+      right: 4px;
+      transform: rotate(18deg);
+    }
+
+    .kitten-eye {
+      position: absolute;
+      top: 9px;
+      width: 4px;
+      height: 5px;
+      border-radius: 999px;
+      background: #e2f4f1;
+    }
+
+    .kitten-eye-left {
+      left: 7px;
+    }
+
+    .kitten-eye-right {
+      right: 7px;
+    }
+
+    .kitten-nose {
+      position: absolute;
+      left: 50%;
+      top: 15px;
+      width: 5px;
+      height: 4px;
+      border-radius: 50% 50% 60% 60%;
+      background: #e2f4f1;
+      transform: translateX(-50%);
+    }
+
+    .kitten-whisker {
+      position: absolute;
+      top: 17px;
+      width: 7px;
+      height: 2px;
+      border-radius: 999px;
+      background: #e2f4f1;
+    }
+
+    .kitten-whisker-left {
+      left: 3px;
+      transform: rotate(12deg);
+    }
+
+    .kitten-whisker-right {
+      right: 3px;
+      transform: rotate(-12deg);
+    }
+
+    .service h3 {
+      margin: 0 0 10px;
+      font-size: 21px;
+    }
+
+    .service p {
+      margin: 0 0 18px;
+      color: var(--muted);
+    }
+
+    .price {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 0 12px;
+      border-radius: 999px;
+      background: #fff2ec;
+      color: #bf4e2d;
+      font-weight: 800;
+    }
+
+    .process {
+      background: var(--paper);
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0;
+      max-width: 1180px;
+      margin: 0 auto;
+      border: 1px solid var(--line);
+      background: var(--cream);
+    }
+
+    .step {
+      min-height: 190px;
+      padding: 28px;
+      border-right: 1px solid var(--line);
+    }
+
+    .step:last-child {
+      border-right: 0;
+    }
+
+    .step-num {
+      color: var(--coral);
+      font-weight: 900;
+      font-size: 15px;
+    }
+
+    .step h3 {
+      margin: 14px 0 10px;
+      font-size: 22px;
+    }
+
+    .step p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .about {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: clamp(28px, 5vw, 68px);
+      align-items: center;
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+
+    .about-carousel {
+      position: relative;
+      aspect-ratio: 4 / 5;
+      overflow: hidden;
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      background: #dbe4e7;
+    }
+
+    .carousel-track {
+      height: 100%;
+      display: flex;
+      transition: transform .55s ease;
+    }
+
+    .carousel-slide {
+      position: relative;
+      min-width: 100%;
+      height: 100%;
+    }
+
+    .carousel-slide::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(24, 33, 38, 0) 48%, rgba(24, 33, 38, .52) 100%);
+      pointer-events: none;
+    }
+
+    .slide-caption {
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      bottom: 18px;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      color: #fff;
+    }
+
+    .slide-caption strong {
+      display: block;
+      font-size: 20px;
+      line-height: 1.2;
+    }
+
+    .slide-caption span {
+      color: rgba(255, 255, 255, .78);
+      font-size: 14px;
+    }
+
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      z-index: 2;
+      display: grid;
+      width: 42px;
+      height: 42px;
+      place-items: center;
+      border: 1px solid rgba(255, 255, 255, .75);
+      border-radius: 50%;
+      color: #fff;
+      background: rgba(24, 33, 38, .3);
+      backdrop-filter: blur(10px);
+      cursor: pointer;
+      transform: translateY(-50%);
+    }
+
+    .carousel-btn:hover {
+      background: rgba(24, 33, 38, .48);
+    }
+
+    .carousel-prev {
+      left: 14px;
+    }
+
+    .carousel-next {
+      right: 14px;
+    }
+
+    .carousel-dots {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 84px;
+      z-index: 2;
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .carousel-dot {
+      width: 9px;
+      height: 9px;
+      padding: 0;
+      border: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .54);
+      cursor: pointer;
+    }
+
+    .carousel-dot.is-active {
+      width: 26px;
+      border-radius: 999px;
+      background: #fff;
+    }
+
+    .about-copy h2 {
+      margin: 0;
+      font-size: clamp(30px, 4vw, 50px);
+      line-height: 1.1;
+    }
+
+    .about-copy p {
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .checks {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 26px;
+    }
+
+    .check {
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--cream);
+      font-weight: 750;
+    }
+
+    .booking {
+      background: #173034;
+      color: #fff;
+    }
+
+    .booking-wrap {
+      display: grid;
+      grid-template-columns: .8fr 1.2fr;
+      gap: clamp(24px, 5vw, 70px);
+      max-width: 1180px;
+      margin: 0 auto;
+      align-items: start;
+    }
+
+    .booking h2 {
+      margin: 0 0 16px;
+      font-size: clamp(32px, 4vw, 52px);
+      line-height: 1.08;
+    }
+
+    .booking p {
+      color: rgba(255, 255, 255, .72);
+      margin: 0;
+    }
+
+    .booking-card {
+      border-radius: 8px;
+      background: #fff;
+      color: var(--ink);
+      padding: 26px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    label {
+      display: grid;
+      gap: 7px;
+      color: #33434a;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      min-height: 46px;
+      padding: 10px 12px;
+      border: 1px solid #cfdadd;
+      border-radius: 8px;
+      color: var(--ink);
+      background: #fff;
+      font: inherit;
+    }
+
+    textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .wide {
+      grid-column: 1 / -1;
+    }
+
+    .submit {
+      width: 100%;
+      min-height: 52px;
+      margin-top: 16px;
+      border: 0;
+      border-radius: 999px;
+      background: var(--coral);
+      color: #fff;
+      font: inherit;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .toast {
+      display: none;
+      margin-top: 14px;
+      padding: 12px 14px;
+      border-radius: 8px;
+      background: #e2f4f1;
+      color: #12665f;
+      font-weight: 750;
+    }
+
+    footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 28px clamp(18px, 5vw, 72px);
+      color: #66757c;
+      background: #fff;
+      border-top: 1px solid var(--line);
+    }
+
+    @media (max-width: 980px) {
+      .nav {
+        display: none;
+      }
+
+      .hero,
+      .about,
+      .booking-wrap {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        min-height: auto;
+      }
+
+      .hero-photo {
+        min-height: 520px;
+      }
+
+      .service-grid,
+      .steps {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .step {
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .step:nth-last-child(-n + 2) {
+        border-bottom: 0;
+      }
+
+      .step:nth-child(odd) {
+        border-right: 1px solid var(--line);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .topbar {
+        padding: 12px 16px;
+      }
+
+      .phone {
+        min-height: 38px;
+        padding: 0 12px;
+        font-size: 13px;
+      }
+
+      .hero {
+        padding: 30px 16px 42px;
+      }
+
+      .metrics,
+      .service-grid,
+      .steps,
+      .checks,
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-photo {
+        min-height: 420px;
+      }
+
+      .photo-main {
+        bottom: 70px;
+      }
+
+      .photo-badge {
+        left: 16px;
+        right: 16px;
+        width: auto;
+      }
+
+      .section-head,
+      footer {
+        display: block;
+      }
+
+      section {
+        padding: 58px 16px;
+      }
+
+      .step,
+      .step:nth-child(odd) {
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .step:last-child {
+        border-bottom: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="蛋挞香香屋首页">
+      <span class="brand-mark" aria-hidden="true">
+        <span class="cat-ear cat-ear-left"></span>
+        <span class="cat-ear cat-ear-right"></span>
+        <span class="cat-face">
+          <span class="cat-eye cat-eye-left"></span>
+          <span class="cat-eye cat-eye-right"></span>
+          <span class="cat-nose"></span>
+        </span>
+      </span>
+      <span>蛋挞香香屋</span>
+    </a>
+    <nav class="nav" aria-label="主导航">
+      <a href="#services">服务</a>
+      <a href="#process">流程</a>
+      <a href="#about">环境</a>
+      <a href="#booking">预约</a>
+    </nav>
+    <a class="phone" href="tel:021-66889900">021-6688-9900</a>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-label="猫咪洗护店介绍">
+      <div class="hero-copy">
+        <div class="kicker">只做猫咪洗护 · 独立猫洗空间</div>
+        <h1>让每只小猫都香香软软、安心变漂亮。</h1>
+        <p class="lead">蛋挞香香屋专注猫咪基础洗护、毛结梳理、皮毛护理和幼猫适应服务。独立猫洗间、低噪烘干、单猫单巾，适合怕生、敏感和长毛猫咪。</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="#booking">立即预约</a>
+          <a class="btn btn-secondary" href="#services">查看价目</a>
+        </div>
+        <div class="metrics" aria-label="门店数据">
+          <div class="metric">
+            <b>4.9</b>
+            <span>顾客评分</span>
+          </div>
+          <div class="metric">
+            <b>30min</b>
+            <span>到店评估</span>
+          </div>
+          <div class="metric">
+            <b>1v1</b>
+            <span>专属护理师</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-photo" aria-hidden="true">
+        <div class="photo-main">
+          <img src="deploy-assets/hero-cat-bathing.jpg" alt="">
+        </div>
+        <div class="photo-badge">
+          <strong>今日可约 6 个时段</strong>
+          <p>猫咪洗护按毛量、毛结和情绪状态评估，护理过程会放慢节奏。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="services" id="services">
+      <div class="section-head">
+        <h2>常用服务</h2>
+        <p>价格按毛量、打结程度和配合状态微调。护理前会先做皮肤、耳道、指甲和情绪状态检查。</p>
+      </div>
+      <div class="service-grid">
+        <article class="service">
+          <div class="service-icon" aria-hidden="true">
+            <span class="grooming-icon">
+              <span class="shower-head"></span>
+              <span class="shower-handle"></span>
+              <span class="water-drop drop-one"></span>
+              <span class="water-drop drop-two"></span>
+              <span class="water-drop drop-three"></span>
+            </span>
+          </div>
+          <h3>猫咪基础洗护</h3>
+          <p>温和清洁、低噪吹干、全身梳毛、耳道护理、指甲修磨。</p>
+          <span class="price">¥198 起</span>
+        </article>
+        <article class="service">
+          <div class="service-icon" aria-hidden="true">
+            <span class="trim-icon">
+              <span class="scissor-blade scissor-blade-left"></span>
+              <span class="scissor-blade scissor-blade-right"></span>
+              <span class="scissor-joint"></span>
+              <span class="scissor-handle scissor-handle-left"></span>
+              <span class="scissor-handle scissor-handle-right"></span>
+            </span>
+          </div>
+          <h3>局部精修</h3>
+          <p>脚底毛、腹底毛、臀部卫生区和脸周细节，先确认再修剪。</p>
+          <span class="price">¥88 起</span>
+        </article>
+        <article class="service">
+          <div class="service-icon" aria-hidden="true">
+            <span class="care-icon">
+              <span class="care-leaf care-leaf-left"></span>
+              <span class="care-leaf care-leaf-right"></span>
+              <span class="care-stem"></span>
+              <span class="care-cross care-cross-vertical"></span>
+              <span class="care-cross care-cross-horizontal"></span>
+            </span>
+          </div>
+          <h3>皮毛护理</h3>
+          <p>改善掉毛异味，梳理打结毛发，让皮毛更柔顺亮泽。</p>
+          <span class="price">¥158 起</span>
+        </article>
+        <article class="service">
+          <div class="service-icon" aria-hidden="true">
+            <span class="kitten-icon">
+              <span class="kitten-ear kitten-ear-left"></span>
+              <span class="kitten-ear kitten-ear-right"></span>
+              <span class="kitten-face">
+                <span class="kitten-eye kitten-eye-left"></span>
+                <span class="kitten-eye kitten-eye-right"></span>
+                <span class="kitten-nose"></span>
+                <span class="kitten-whisker kitten-whisker-left"></span>
+                <span class="kitten-whisker kitten-whisker-right"></span>
+              </span>
+            </span>
+          </div>
+          <h3>幼猫适应洗</h3>
+          <p>更短流程、更慢节奏，帮助第一次洗护的小猫熟悉环境。</p>
+          <span class="price">¥168 起</span>
+        </article>
+      </div>
+    </section>
+
+    <section class="process" id="process">
+      <div class="section-head">
+        <h2>到店流程</h2>
+        <p>所有项目都以猫咪状态为先。遇到明显不适、皮肤破损或严重应激，会建议暂停服务。</p>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">01</div>
+          <h3>健康评估</h3>
+          <p>确认年龄、疫苗、皮肤、耳道和毛结情况。</p>
+        </div>
+        <div class="step">
+          <div class="step-num">02</div>
+          <h3>护理沟通</h3>
+          <p>确认洗护项目、造型偏好和预计完成时间。</p>
+        </div>
+        <div class="step">
+          <div class="step-num">03</div>
+          <h3>单宠操作</h3>
+          <p>一只猫咪一套用品，护理过程可拍照同步。</p>
+        </div>
+        <div class="step">
+          <div class="step-num">04</div>
+          <h3>复查交付</h3>
+          <p>检查毛发、耳朵、指甲和皮肤，说明居家护理建议。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="about">
+        <div class="about-carousel" aria-label="店内环境轮播">
+          <div class="carousel-track" id="environmentTrack">
+            <figure class="carousel-slide">
+              <img src="deploy-assets/shop-open-grooming.jpg" alt="温馨高端的开放式猫咪洗护操作区">
+              <figcaption class="slide-caption">
+                <strong>开放洗护区</strong>
+                <span>可视化操作台</span>
+              </figcaption>
+            </figure>
+            <figure class="carousel-slide">
+              <img src="deploy-assets/shop-bathing-room.jpg" alt="明亮整洁的猫咪沐浴护理间">
+              <figcaption class="slide-caption">
+                <strong>独立沐浴间</strong>
+                <span>温和清洁动线</span>
+              </figcaption>
+            </figure>
+            <figure class="carousel-slide">
+              <img src="deploy-assets/shop-drying-lounge.jpg" alt="安静舒适的猫咪烘干与休息区域">
+              <figcaption class="slide-caption">
+                <strong>低噪烘干区</strong>
+                <span>减少等待焦虑</span>
+              </figcaption>
+            </figure>
+            <figure class="carousel-slide">
+              <img src="deploy-assets/shop-reception.jpg" alt="温馨高端的猫咪洗护店前台和零售区">
+              <figcaption class="slide-caption">
+                <strong>前台接待区</strong>
+                <span>预约与护理档案</span>
+              </figcaption>
+            </figure>
+          </div>
+          <button class="carousel-btn carousel-prev" type="button" aria-label="上一张环境图">‹</button>
+          <button class="carousel-btn carousel-next" type="button" aria-label="下一张环境图">›</button>
+          <div class="carousel-dots" aria-label="选择环境图">
+            <button class="carousel-dot is-active" type="button" aria-label="查看开放洗护区"></button>
+            <button class="carousel-dot" type="button" aria-label="查看独立沐浴间"></button>
+            <button class="carousel-dot" type="button" aria-label="查看低噪烘干区"></button>
+            <button class="carousel-dot" type="button" aria-label="查看前台接待区"></button>
+          </div>
+        </div>
+        <div class="about-copy">
+          <h2>干净明亮的猫咪专属洗护区</h2>
+          <p>门店设置独立猫洗空间、可视洗护台和低噪烘干间。护理师会根据猫咪情绪调整节奏，避免赶时间式操作。</p>
+          <div class="checks">
+            <div class="check">每日消毒记录</div>
+            <div class="check">单宠单巾单梳</div>
+            <div class="check">低噪吹水设备</div>
+            <div class="check">会员护理档案</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="booking" id="booking">
+      <div class="booking-wrap">
+        <div>
+          <h2>预约洗护时间</h2>
+          <p>提交后门店会在营业时间内联系确认。营业时间：周一至周日 10:00-20:00。</p>
+        </div>
+        <form class="booking-card" id="bookingForm">
+          <div class="form-grid">
+            <label>
+              猫咪姓名
+              <input name="pet" placeholder="例如：蛋挞" required>
+            </label>
+            <label>
+              联系电话
+              <input name="phone" placeholder="请输入手机号" required>
+            </label>
+            <label>
+              猫咪类型
+              <select name="type" required>
+                <option value="">请选择</option>
+                <option>短毛猫</option>
+                <option>长毛猫</option>
+                <option>幼猫</option>
+                <option>敏感猫</option>
+              </select>
+            </label>
+            <label>
+              预约服务
+              <select name="service" required>
+                <option value="">请选择</option>
+                <option>猫咪基础洗护</option>
+                <option>局部精修</option>
+                <option>皮毛护理</option>
+                <option>幼猫适应洗</option>
+              </select>
+            </label>
+            <label class="wide">
+              备注
+              <textarea name="note" placeholder="可填写体重、毛结、怕生、皮肤情况等"></textarea>
+            </label>
+          </div>
+          <button class="submit" type="submit">提交预约</button>
+          <div class="toast" id="toast">预约信息已记录，门店会尽快联系确认。</div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>蛋挞香香屋 · 上海市安和路 88 号</span>
+    <span>微信预约：DantaCatSpa</span>
+  </footer>
+
+  <script>
+    const form = document.querySelector("#bookingForm");
+    const toast = document.querySelector("#toast");
+    const track = document.querySelector("#environmentTrack");
+    const dots = [...document.querySelectorAll(".carousel-dot")];
+    const prev = document.querySelector(".carousel-prev");
+    const next = document.querySelector(".carousel-next");
+    let currentSlide = 0;
+    let carouselTimer;
+
+    function showSlide(index) {
+      currentSlide = (index + dots.length) % dots.length;
+      track.style.transform = `translateX(-${currentSlide * 100}%)`;
+      dots.forEach((dot, dotIndex) => {
+        dot.classList.toggle("is-active", dotIndex === currentSlide);
+      });
+    }
+
+    function restartCarousel() {
+      clearInterval(carouselTimer);
+      carouselTimer = setInterval(() => showSlide(currentSlide + 1), 4200);
+    }
+
+    dots.forEach((dot, index) => {
+      dot.addEventListener("click", () => {
+        showSlide(index);
+        restartCarousel();
+      });
+    });
+
+    prev.addEventListener("click", () => {
+      showSlide(currentSlide - 1);
+      restartCarousel();
+    });
+
+    next.addEventListener("click", () => {
+      showSlide(currentSlide + 1);
+      restartCarousel();
+    });
+
+    restartCarousel();
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      toast.style.display = "block";
+      form.reset();
+    });
+  </script>
+</body>
+</html>
